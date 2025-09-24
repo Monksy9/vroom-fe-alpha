@@ -23,7 +23,10 @@ export interface VehiclePreferences {
   selectedInspiration: string[];
 }
 
-export function VehicleOnboarding({ onBack }: { onBack?: () => void }) {
+export function VehicleOnboarding({ onBack, onIdentifyType }: { 
+  onBack?: () => void;
+  onIdentifyType?: (preferences: VehiclePreferences) => void;
+}) {
   const [currentStep, setCurrentStep] = useState(0);
   const [preferences, setPreferences] = useState<VehiclePreferences>({
     vehicleType: '',
@@ -86,7 +89,7 @@ export function VehicleOnboarding({ onBack }: { onBack?: () => void }) {
       case 7:
         return <ImageUploadStep preferences={preferences} updatePreferences={updatePreferences} onNext={nextStep} onBack={prevStep} />;
       case 8:
-        return <BriefGenerationStep preferences={preferences} onBack={prevStep} />;
+        return <BriefGenerationStep preferences={preferences} onBack={prevStep} onIdentifyType={() => onIdentifyType?.(preferences)} onStartNewSearch={() => setCurrentStep(0)} />;
       default:
         return null;
     }
@@ -402,7 +405,7 @@ function AdditionalFactorsStep({ preferences, updatePreferences, onNext, onBack 
   return (
     <Card className="max-w-2xl mx-auto">
       <CardHeader className="text-center">
-        <CardTitle>Final preferences</CardTitle>
+        <CardTitle>Additional preferences</CardTitle>
         <CardDescription>Help us refine your vehicle brief with these additional factors</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -475,7 +478,7 @@ function AdditionalFactorsStep({ preferences, updatePreferences, onNext, onBack 
             Back
           </Button>
           <Button onClick={onNext} disabled={!preferences.sizeRequirement || !preferences.safetyPriority || !preferences.timeline}>
-            Generate Brief
+            Next
             <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
@@ -746,7 +749,7 @@ function ImageUploadStep({ preferences, updatePreferences, onNext, onBack }: {
           Back
         </Button>
         <Button onClick={onNext}>
-          Generate Brief
+          Next
           <ChevronRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
@@ -754,9 +757,11 @@ function ImageUploadStep({ preferences, updatePreferences, onNext, onBack }: {
   );
 }
 
-function BriefGenerationStep({ preferences, onBack }: {
+function BriefGenerationStep({ preferences, onBack, onIdentifyType, onStartNewSearch }: {
   preferences: VehiclePreferences;
   onBack: () => void;
+  onIdentifyType: () => void;
+  onStartNewSearch: () => void;
 }) {
   const formatBudget = (value: number) => {
     if (value >= 1000) {
@@ -892,17 +897,26 @@ function BriefGenerationStep({ preferences, onBack }: {
             </div>
           </div>
           
-          <div className="flex gap-3 pt-4">
-            <Button variant="outline" onClick={onBack}>
-              <ChevronLeft className="mr-2 h-4 w-4" />
-              Back to Edit
+          <div className="space-y-4 pt-4">
+            <Button 
+              className="w-full bg-black text-white hover:bg-black/90 py-6 text-lg"
+              onClick={onIdentifyType}
+            >
+              Identify Your Type
             </Button>
-            <Button className="flex-1">
-              Share Brief
-            </Button>
-            <Button variant="outline">
-              Start New Search
-            </Button>
+            
+            <div className="flex gap-3">
+              <Button variant="outline" onClick={onBack}>
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                Back to Edit
+              </Button>
+              <Button variant="outline" onClick={onStartNewSearch} className="flex-1">
+                Start New Search
+              </Button>
+              <Button variant="outline" className="flex-1">
+                Share Brief
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
