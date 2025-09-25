@@ -1,11 +1,8 @@
 # Dependencies
-node_modules
+node_modules/
 /.pnp
-.pnp.js
-
-# Production builds
-/build
-/dist
+.pnp.*
+jspm_packages/
 
 # Environment variables
 .env
@@ -13,6 +10,15 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
+.env.test
+
+# IDE files
+.vscode/
+.vscode-test
+.idea/
+*.swp
+*.swo
+*~
 
 # Logs
 npm-debug.log*
@@ -21,64 +27,8 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage
-*.lcov
-
-# NYC test coverage
-.nyc_output
-
-# Dependency directories
-node_modules/
-jspm_packages/
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env
-.env.test
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# Yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Media files
+*.mp4
 
 # OS generated files
 .DS_Store
@@ -89,10 +39,46 @@ jspm_packages/
 ehthumbs.db
 Thumbs.db
 
+# Package cache
+.npm
+.eslintcache
+
+# Production builds
+/build
+/dist
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
 # Temporary files
 *.tmp
 *.temp
 temp_*
+*.backup
+
+# Test coverage
+coverage/
+*.lcov
+.nyc_output
+
+# Tool cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.yarn-integrity
+.node_repl_history
+
+# Archives
+*.tgz
 *.zip
 *.tar.gz
-*.backup

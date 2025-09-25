@@ -1,7 +1,7 @@
 
-  # User-Friendly Sign-Up Flow
+  # Messing around with figma AI
 
-  This is a code bundle for User-Friendly Sign-Up Flow. The original project is available at https://www.figma.com/design/y92IKqEZacjEnGYjaKpTcu/User-Friendly-Sign-Up-Flow.
+  This is a code bundle for Messing around with figma AI. The original project is available at https://www.figma.com/design/y92IKqEZacjEnGYjaKpTcu/Messing-around-with-figma-AI.
 
   ## Running the code
 

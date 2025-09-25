@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { ArrowLeft, ChevronRight, X } from 'lucide-react';
+import { ArrowLeft, ChevronRight, X, ChevronLeft } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface VehicleRecommendation {
@@ -28,12 +28,12 @@ interface VehicleDetailsProps {
 export function VehicleDetails({ vehicle, onBack, onClose, onAddVehicle, isAdded }: VehicleDetailsProps) {
   const getDetailedSpecs = () => {
     return {
-      engine: '1.5L Turbo',
-      fuelEconomy: '45 MPG',
+      engine: '1.5L - 2.0L Turbo',
+      fuelEconomy: '40 - 50 MPG',
       transmission: 'Manual',
-      year: '2023',
-      mileage: '12,500 miles',
-      color: 'Metallic Blue',
+      year: '2021 - 2024',
+      mileage: '8,000 - 25,000 miles',
+      color: 'Various',
       seats: '5',
       doors: '5'
     };
@@ -72,12 +72,23 @@ export function VehicleDetails({ vehicle, onBack, onClose, onAddVehicle, isAdded
               </Button>
               <div>
                 <h1 className="text-xl font-semibold">{vehicle.make} {vehicle.model}</h1>
-                <p className="text-sm text-muted-foreground">Pretty good for your brief</p>
+                <p className="text-sm text-muted-foreground">Model Overview</p>
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={onClose}>
-              <X className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm">
+                <ChevronLeft className="h-4 w-4 mr-1" />
+                Previous Model
+              </Button>
+              <Button variant="ghost" size="sm">
+                Next Model
+                <ChevronRight className="h-4 w-4 ml-1" />
+              </Button>
+              <Button variant="ghost" size="sm" onClick={onClose}>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+
           </div>
         </div>
       </div>
@@ -118,9 +129,11 @@ export function VehicleDetails({ vehicle, onBack, onClose, onAddVehicle, isAdded
                 </div>
                 <div className="text-center space-y-2">
                   <div className="text-sm text-muted-foreground">You could save {vehicle.savings}</div>
-                  <Button size="sm" className="w-full">
-                    Choose your deal
-                  </Button>
+                  <div className="space-y-2 text-sm text-muted-foreground">
+                    <div>1,247 listings available</div>
+                    <div>Average deal time: 3.2 days</div>
+                    <div>Best deals in: Manchester, Birmingham</div>
+                  </div>
                 </div>
               </div>
 
@@ -186,7 +199,7 @@ export function VehicleDetails({ vehicle, onBack, onClose, onAddVehicle, isAdded
         <Card>
           <CardHeader>
             <CardTitle>Pros & Cons</CardTitle>
-            <CardDescription>What you should know about this vehicle</CardDescription>
+            <CardDescription>What you should know about this Model</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-8">

@@ -16,8 +16,12 @@ import {
   Star,
   ChevronRight,
   Menu,
-  Globe
+  Globe,
+  Phone,
+  MessageCircle,
+  HelpCircle
 } from 'lucide-react';
+import broomLogo from 'figma:asset/43d8df857f2809aa91f07281bc68c37f33965705.png';
 
 interface HomepageProps {
   onStartOnboarding: () => void;
@@ -31,10 +35,7 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Car className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-semibold">DealFinder</span>
+              <img src={broomLogo} alt="Broom" className="h-10 w-auto" />
             </div>
             
             <div className="hidden md:flex items-center gap-8">
@@ -61,55 +62,26 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Moving Gradient Background */}
+        {/* Video Background */}
         <div className="absolute inset-0">
-          {/* Primary animated gradient layer */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-pink-400 via-red-400 to-orange-400"
-            animate={{
-              backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{
-              backgroundSize: "400% 400%",
-            }}
-          />
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(1.1)', transform: 'scale(1.25)' }}
+          >
+            <source src="/video0.mp4" type="video/mp4" />
+            {/* Fallback gradient for when video doesn't load */}
+          </video>
+          {/* Fallback background with car-themed gradients */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 opacity-30"></div>
           
-          {/* Secondary moving gradient layer */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-tl from-purple-500 via-blue-500 to-cyan-400 opacity-70"
-            animate={{
-              backgroundPosition: ["100% 100%", "0% 0%", "100% 100%"],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{
-              backgroundSize: "400% 400%",
-            }}
-          />
-          
-          {/* Third flowing gradient layer */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 opacity-50"
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{
-              backgroundSize: "400% 400%",
-            }}
-          />
+          {/* Car-themed overlay patterns */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                             radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)`
+          }}></div>
         </div>
 
         {/* Animated Background Elements */}
@@ -195,13 +167,13 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
               </Badge>
               
               <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                One app
+                Sweep away
                 <br />
-                for all needs
+                bad deals
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
-                Single account for all your vehicle needs.
+                Find the perfect vehicle deal with Broom's intelligent matching system.
               </p>
             </motion.div>
 
@@ -245,20 +217,36 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
                 </motion.div>
               </div>
 
-              {/* CTA Button */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  size="lg" 
-                  className="px-8 py-4 text-lg bg-white text-gray-900 hover:bg-white/90 font-semibold"
-                  onClick={onStartOnboarding}
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  Find Your Perfect Deal
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-              </motion.div>
+                  <Button 
+                    size="lg" 
+                    className="px-8 py-4 text-lg bg-white text-gray-900 hover:bg-white/90 font-semibold"
+                    onClick={onStartOnboarding}
+                  >
+                    Find Your Perfect Deal
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="px-8 py-4 text-lg bg-white/10 border-white/30 text-white hover:bg-white/20 font-semibold backdrop-blur-sm"
+                  >
+                    <HelpCircle className="mr-2 h-5 w-5" />
+                    Need Help with a Deal?
+                  </Button>
+                </motion.div>
+              </div>
 
               {/* Download Buttons */}
               <div className="flex justify-center gap-4 mt-8">
@@ -291,6 +279,100 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
         </motion.div>
       </section>
 
+      {/* Need Help Section */}
+      <section className="py-20 bg-background border-t">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">Need help with a deal?</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Our expert team is here to help you evaluate, negotiate, and secure the best possible deal
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="text-center h-full">
+                  <CardHeader>
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <MessageCircle className="h-8 w-8 text-blue-600" />
+                    </div>
+                    <CardTitle>Chat with Expert</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="mb-4">
+                      Get instant advice from our vehicle experts via live chat
+                    </CardDescription>
+                    <Button variant="outline" className="w-full">
+                      Start Chat
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Card className="text-center h-full">
+                  <CardHeader>
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Phone className="h-8 w-8 text-green-600" />
+                    </div>
+                    <CardTitle>Call for Support</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="mb-4">
+                      Speak directly with our team for personalized guidance
+                    </CardDescription>
+                    <Button variant="outline" className="w-full">
+                      Call Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <Card className="text-center h-full">
+                  <CardHeader>
+                    <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Search className="h-8 w-8 text-purple-600" />
+                    </div>
+                    <CardTitle>Deal Analysis</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="mb-4">
+                      Send us any listing for a free professional assessment
+                    </CardDescription>
+                    <Button variant="outline" className="w-full">
+                      Get Analysis
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Use Section */}
       <section id="why-us" className="py-20 bg-background">
         <div className="container mx-auto px-4">
@@ -301,7 +383,7 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Why choose DealFinder?</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Why choose Broom?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               We make finding the perfect vehicle simple, fast, and tailored to your exact needs
             </p>
@@ -406,10 +488,7 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Car className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-semibold">DealFinder</span>
+              <img src={broomLogo} alt="Broom" className="h-8 w-auto" />
             </div>
             
             <div className="flex items-center gap-6 text-muted-foreground">
@@ -420,7 +499,7 @@ export function Homepage({ onStartOnboarding }: HomepageProps) {
           </div>
           
           <div className="mt-8 pt-8 border-t text-center text-muted-foreground">
-            <p>&copy; 2024 DealFinder. All rights reserved.</p>
+            <p>&copy; 2024 Broom. All rights reserved.</p>
           </div>
         </div>
       </footer>

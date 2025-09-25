@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
-import { ArrowLeft, Heart, MapPin, Clock, Fuel, Users, Settings } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Clock, Fuel, Users, Settings, Search, BookmarkCheck, Car } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
@@ -31,7 +31,7 @@ interface VehicleListingsProps {
 }
 
 export function VehicleListings({ vehicleName, onBack, onSave }: VehicleListingsProps) {
-  const [activeTab, setActiveTab] = useState<'fair-value' | 'live-deals'>('fair-value');
+  const [activeTab, setActiveTab] = useState<'fair-value' | 'live-deals'>('live-deals');
   const [calculatorData, setCalculatorData] = useState({
     url: '',
     listedPrice: '',
@@ -133,7 +133,68 @@ export function VehicleListings({ vehicleName, onBack, onSave }: VehicleListings
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="flex min-h-screen">
+        {/* Left Sidebar */}
+        <div className="w-64 bg-muted/30 border-r p-6 space-y-6">
+          <div>
+            <h3 className="font-semibold mb-3 flex items-center gap-2">
+              <Search className="h-4 w-4" />
+              Prior Searches
+            </h3>
+            <div className="space-y-2">
+              <Button variant="ghost" className="w-full justify-start text-sm">
+                Volkswagen Golf
+              </Button>
+              <Button variant="ghost" className="w-full justify-start text-sm">
+                Toyota Corolla Hybrid
+              </Button>
+              <Button variant="ghost" className="w-full justify-start text-sm">
+                Ford Transit Custom
+              </Button>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-3 flex items-center gap-2">
+              <BookmarkCheck className="h-4 w-4" />
+              Saved Models
+            </h3>
+            <div className="space-y-2">
+              <Button variant="ghost" className="w-full justify-start text-sm">
+                BMW 3 Series
+              </Button>
+              <Button variant="ghost" className="w-full justify-start text-sm">
+                Honda Civic
+              </Button>
+              <Button variant="ghost" className="w-full justify-start text-sm">
+                VW California
+              </Button>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-3 flex items-center gap-2">
+              <Car className="h-4 w-4" />
+              Saved Vehicles
+            </h3>
+            <div className="space-y-2">
+              <div className="text-sm space-y-1">
+                <Button variant="ghost" className="w-full justify-start text-sm">
+                  2023 Golf GTI - £24k
+                </Button>
+                <Button variant="ghost" className="w-full justify-start text-sm">
+                  2022 Corolla - £19k
+                </Button>
+                <Button variant="ghost" className="w-full justify-start text-sm">
+                  2021 Transit - £28k
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 px-4 py-8 max-w-6xl mx-auto">
         {/* Vehicle Description */}
         <Card className="mb-6">
           <CardContent className="pt-6">
@@ -408,6 +469,7 @@ export function VehicleListings({ vehicleName, onBack, onSave }: VehicleListings
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

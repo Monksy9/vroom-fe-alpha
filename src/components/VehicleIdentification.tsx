@@ -171,7 +171,7 @@ export function VehicleIdentification({ preferences, onBack, onViewDetails, adde
             </Button>
             <div className="flex-1">
               <h1 className="text-xl font-semibold">
-                {getVehicleIcon()} Vehicle Recommendations for {preferences.vehicleType.charAt(0).toUpperCase() + preferences.vehicleType.slice(1)}
+                {getVehicleIcon()} Model Recommendations for {preferences.vehicleType.charAt(0).toUpperCase() + preferences.vehicleType.slice(1)}
               </h1>
               <p className="text-sm text-muted-foreground">Budget: {formatBudget(preferences.budget[0])}</p>
             </div>
@@ -276,10 +276,10 @@ export function VehicleIdentification({ preferences, onBack, onViewDetails, adde
           </Card>
         )}
 
-        {/* Available Vehicle Recommendations */}
+        {/* Available Model Recommendations */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Recommended Vehicles</h2>
+            <h2 className="text-xl font-semibold">Recommended Models</h2>
             <p className="text-sm text-muted-foreground">
               {addedVehicles.length > 0 ? `${addedVehicles.length} selected` : 'Select vehicles to compare'}
             </p>
